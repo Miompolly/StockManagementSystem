@@ -44,12 +44,12 @@ a{
  <h2>
   Please fill this form to register   
  </h2>
- <form action="connect.php" method="POST">
+ <form action="ServletUser" method="POST">
 <input type="text" name="fname" placeholder="Full name" required>
 <br><br>
 <input type="email" name="email" placeholder="Write your email" required><br><br>
 <input type="password" name="password" placeholder="Create password" required><br><br>
-<input type="passward" name="cpassword" placeholder="Confirm your password" required><br><br>
+
 <button type="submit" name="register">Register</button>
  </form>
  <p>Already have account</p> <a href="index.jsp">Login here</a>

@@ -44,10 +44,10 @@ a{
  <h2>
  Login Form   
  </h2>
- <form action="connecct.php" method="POST" autocomplete="off">
+ <form action="UserLogin" method="POST" autocomplete="off">
 
-<input type="email" name="email" placeholder="Write  here your email" required><br><br>
-<input type="password" name="password" placeholder="White here your password" required><br><br>
+<input type="email" name="form_email" placeholder="Write  here your email" required><br><br>
+<input type="password" name="form_password" placeholder="White here your password" required><br><br>
 
 <button type="submit" name="login">Login</button>
  </form>

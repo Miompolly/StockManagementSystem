@@ -9,4 +9,34 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>ServletUser</display-name>
+    <servlet-name>ServletUser</servlet-name>
+    <servlet-class>com.UserReg.ServletUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletUser</servlet-name>
+    <url-pattern>/ServletUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserLogin</display-name>
+    <servlet-name>UserLogin</servlet-name>
+    <servlet-class>com.UserReg.UserLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserLogin</servlet-name>
+    <url-pattern>/UserLogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StockServlet</display-name>
+    <servlet-name>StockServlet</servlet-name>
+    <servlet-class>com.UserReg.StockServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StockServlet</servlet-name>
+    <url-pattern>/StockServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

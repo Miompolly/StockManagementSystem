@@ -1,6 +1,5 @@
-<%@page import="com.UserReg.ConnecDB"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="java.sql.*" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -9,9 +8,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STM stock</title>
+    <title>jsp</title>
     <link rel="stylesheet" href="style.css">
- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -232,7 +231,7 @@ label{
 }
 .table{
     width: 95%;
-    height: auto;
+    height: 200px;
     border: 300px;
     margin-left: 20px;
     background-color: whitesmoke;
@@ -254,9 +253,11 @@ input{
     height: 30px;
     width: 80%;
 }
- 
 
-</style> </head>
+</style>
+
+
+  </head>
 <body>
   <div class="main">
 
@@ -267,14 +268,14 @@ input{
         <div class="nav">
             <div class="log">
          <img src="p4.PNG" alt="">
-         
+          
       
   
             </div>
 
             <div class="important">
             <div class="cont">
-            <i class="fa fa-vimeo-square"></i><a href="dashboard.jsp">Dashboard</a>
+            <i class="fa fa-vimeo-square"></i><a href="dashbord.jsp">dashbord</a>
             </div>
   
             <div class="cont">
@@ -312,75 +313,32 @@ input{
 
 
         </div>
-
-<div class="down">
-
-
-<h1> Welcome to Stock Management System </h1>
-
-<div class="mid">
-
-
 <div class="down">
 <div class="mid">
 <div class="rtn">
- <div class="hed">List of stocks</div>
+ <div class="hed">Add New Item</div>
 </div>
- <div class="itemss"></div>
+
 <div class="tb">
-<table class="table table-bordered" border="1">
-    <thead>
-      <tr style="background-color: rgb(2, 4, 43);color:white;text-align:center;">
-      <th>No</th>
-        <th>Item Name</th>
-        <th>Supplier</th>
-        <th>Description</th>
-        <th>Available stocks</th>
-        <th>Edit</th>
-         <th>Remove</th>
-       
-      </tr>
-    </thead>
-    <tbody>
-      <%
-            try {
-            	ConnecDB db=new ConnecDB();
-            	db.getCon();
-            	ResultSet  rs=db.getItem();
-            	
-            	while(rs.next()){
-            	 %>
-      <tr>
-        <td><%=rs.getInt("No") %></td>
-        <td><%=rs.getString("ItemName")%></td>
-        <td><%=rs.getString("supplierName") %></td>
-        <td><%=rs.getString("description") %></td>
-        <td><%=rs.getString("quantity") %></td>
-      <td> 
-      <a href="update.jsp?id=<%= rs.getInt("No")  %>"><button class="btn btn-primary" style="background-color: green;">Edit</button></a>
-      </td>
-      <td><a href="deleteFood.jsp?id=<%= rs.getInt("NO") %>"><button class="btn btn-primary" style="background-color:red;">Delete</button></a></td>
-      </tr>
-       <% }
-          
-                }catch(Exception e){
-                	e.printStackTrace();
-                }
-            
-            
-               
-            %>
-      
-      
-      
-          </tbody>
-  </table>
+
+<form action="StockServlet" method="POST">
+
+    <input type="text" placeholder="Item Name" name="itemname">
+    <input type="text" placeholder="Supplier Name" name="suppliername">
+    <input type="text" placeholder="Description" name="desc">
+    <input type="number" placeholder="Quantity" name="qty">
+
 
 </div>
 
 <div class="prin">
 
-<div class="edt"><a href="sform.jsp" >Add Item (+)</a></div>
+<div class="edt">
+<button type="submit">Save Item</button>
+
+</form>
+
+</div>
 
 
 
@@ -389,7 +347,6 @@ input{
 
 
 </div>
-
 <div class="fot">
 
 <div class="lft"><p>Copyright &#169 2023 All right reserved</p>  </div>
