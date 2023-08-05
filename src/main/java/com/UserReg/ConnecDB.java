@@ -1,5 +1,7 @@
 package com.UserReg;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -38,54 +40,53 @@ public class ConnecDB {
 	}
 	
 	public String addUser(User user1) {
-		String messag="Created Successfully";
-		
-		loadDriver();
-		Connection cnx=getCon();
-	
-			
-			String sql="INSERT INTO users (FullName,email,password,role)VALUES(?,?,?,?)";
-			try {
-				PreparedStatement stm=cnx.prepareStatement(sql);
-				stm.setString(1,user1.getNames());
-				stm.setString(2,user1.getEmail());
-				stm.setString(3,user1.getPassword());
-				stm.setString(4,user1.getRole());
-				int rs=stm.executeUpdate();
-				
-				if(rs>0) {
-					JOptionPane.showMessageDialog(null, "User Created Successfully");
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "User not Created !!! Try again");
-				}
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-				System.out.println("User not created ,"+e.getMessage());
-			}
-			return messag;
-		}
+	    String messag = "Created Successfully";
+
+	    loadDriver();
+	    Connection cnx = getCon();
+
+	    String sql = "INSERT INTO users (FullName, email, password, role) VALUES (?, ?, ?, ?)";
+	    try {
+	        PreparedStatement stm = cnx.prepareStatement(sql);
+	        stm.setString(1, user1.getNames());
+	        stm.setString(2, user1.getEmail());
+	        
+	        String hashedPassword = hashMD5(user1.getPassword()); 
+	        stm.setString(3, hashedPassword); 
+	        
+	        stm.setString(4, user1.getRole());
+	        int rs = stm.executeUpdate();
+	        
+	        if (rs > 0) {
+	            JOptionPane.showMessageDialog(null, "User Created Successfully");
+	        } else {
+	            JOptionPane.showMessageDialog(null, "User not Created !!! Try again");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        System.out.println("User not created, " + e.getMessage());
+	    }
+	    return messag;
+	}
+
 		
 	public ResultSet getUser(Login loguser1) {
-		ResultSet row=null;
-		loadDriver();
-		Connection cnx=getCon();
-		String sql="SELECT * FROM users WHERE email=? AND password=?";
-		try {
-			PreparedStatement stm=cnx.prepareStatement(sql);
-			stm.setString(1, loguser1.getEmail());
-			stm.setString(2, loguser1.getPassword());
-			row=stm.executeQuery();
-	
-		} catch (SQLException e) {
-		
-			e.printStackTrace();
-		}
-		
-		return row;
-		
+	    ResultSet row = null;
+	    loadDriver();
+	    Connection cnx = getCon();
+	    String sql = "SELECT * FROM users WHERE email=? AND password=?";
+	    try {
+	        PreparedStatement stm = cnx.prepareStatement(sql);
+	        stm.setString(1, loguser1.getEmail());
+	        String hashedPassword = hashMD5(loguser1.getPassword()); 
+	        stm.setString(2, hashedPassword); 
+	        row = stm.executeQuery();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return row;
 	}
+
 	
 	public String addStock(Stock stock1) {
 		String messag="Created Successfully";
@@ -306,6 +307,23 @@ public class ConnecDB {
 	  
 	}
 	
+	
+	private String hashMD5(String input) {
+	    try {
+	        MessageDigest md = MessageDigest.getInstance("MD5");
+	        byte[] messageDigest = md.digest(input.getBytes());
+	        StringBuilder hexString = new StringBuilder();
+
+	        for (byte b : messageDigest) {
+	            hexString.append(String.format("%02x", b));
+	        }
+
+	        return hexString.toString();
+	    } catch (NoSuchAlgorithmException e) {
+	        throw new RuntimeException(e);
+	    }
+	}
+
 	
 	
 }

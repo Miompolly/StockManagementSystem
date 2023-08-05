@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@page import="com.UserReg.ConnecDB"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.sql.*" %>
 
 
 <!DOCTYPE html>
@@ -9,10 +9,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jsp</title>
+    <title>STM stock</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+ <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 
@@ -24,6 +25,18 @@
    
     
   
+}
+.sta{
+  padding-left: 30px;
+}
+.log img{
+  width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    padding:20px;
+}
+.log{
+  background-color: rgb(12, 102, 72);
 }
 
 #lang{
@@ -54,12 +67,6 @@
 
 
 }
-.log img {
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    padding: 5%;
-}
 .classi select{
   padding:10px;
 }
@@ -82,16 +89,72 @@
   padding-left:2%;
 }
 .mid{
-  height: 200px;
+  height: 400px;
   width: 96%;
- 
-  box-shadow: 1px 10px 8px 1px aliceblue;
+ background-color: white;
+  box-shadow: 1px 10px 8px 1px white;
   margin-left:2%;
-  display:grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 1px;
-}
+  margin-top: 2%;
+ display: flex;
+ flex-direction: column;
 
+  grid-gap: 1px;
+  border-top:5px solid blue ;
+  text-align: center;
+  /* border: 1px solid ; */
+  border-radius: 10px;
+}
+.prin{
+  background-color: rgba(228, 224, 224, 0.863);
+  height: 50px;
+ text-align: center;
+  gap: 5px;
+  display: flex;
+  margin-top: 10px;
+}
+.print{
+  background-color: green;
+  color: white;
+  height: 30px;
+  width: 80px;
+
+ 
+}
+a{
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  
+}
+.edt{
+  background-color: blue;
+  color: white;
+  height: 30px;
+  width: 130px;
+  margin-left: 35%;
+  padding-top: 10px;
+  margin-top: 4px;
+}
+.itemm{
+  background-color: black;
+  color: white;
+  height: 30px;
+  width: 150px;
+}
+.hed{
+  height: 30px;
+  border-bottom: 2px solid black;
+  text-align: left;
+  padding: 10px;
+}
+.itemss{
+  color: rgb(72, 177, 226);
+  text-align: left;
+  padding: 15px;
+  padding-bottom: 20px;
+  font-size: 30px;
+  font-family: bold;
+}
 .men{
   background-color:white;
   height: 100px;
@@ -113,7 +176,7 @@
 }
 
 .fot{
-  margin-top:175px;
+  margin-top:60px;
   height: 15%;
   width: 100%;
   background-color:white;
@@ -167,23 +230,33 @@ label{
   text-align: right;
   padding: 10px;
 }
-
-.sta{
-  padding-left: 30px;
+.table{
+    width: 95%;
+    height: auto;
+    border: 300px;
+    margin-left: 20px;
+    background-color: whitesmoke;
 }
-.log img{
-  width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    padding:20px;
+button{
+    border: none;
+    color: white;
+    font-size: 20px;
 }
-.log{
-  background-color: rgb(12, 102, 72);
+form{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
+    
 }
-</style>
+input{
+    background-color: rgb(212, 212, 207);
+    margin-top:10px ;
+    height: 30px;
+    width: 80%;
+}
+ 
 
-
-  </head>
+</style> </head>
 <body>
   <div class="main">
 
@@ -194,22 +267,19 @@ label{
         <div class="nav">
             <div class="log">
          <img src="p4.PNG" alt="">
-          
+         
       
   
             </div>
 
-            <div class="important">
-            <div class="cont">
-            <a href="dashbord.jsp">dashbord</a>
-            </div>
+            <div class="important" style="padding-left: 2rem;">
   
             <div class="cont">
-   <a href="stock.jsp"> Stock</a>
+              <a href="userDashboard.jsp"> Stock</a>
             </div>
 
             <div class="cont">
-          <a href="user.jsp">User list</a>
+          <a href="addItem.jsp">Add Item </a>
             </div>
          
             <div class="cont">
@@ -228,7 +298,7 @@ label{
         <div class="classi">
        
        <select name="languages" id="lang">
-        <option value="admin">Administrator Admin</option>
+        <option value="admin">User Dashboard</option>
 
 </select>
 
@@ -243,25 +313,43 @@ label{
 <div class="down">
 
 
-<h1> Welcome to Stock Management System </h1>
-
 <div class="mid">
 
 
+<div class="down">
+<div class="mid">
+<div class="rtn">
+ <div class="hed">Update Item</div>
+</div>
+
+<div class="tb">
+
+<form action="updateServlet2" method="POST">
+     <input type="number"  name="itemID" value="<%= request.getParameter("ItemId") %>" readonlyy>
+    <input type="text" placeholder="Item Name" name="itemname" value="<%= request.getParameter("ItemName") %>" >
+    <input type="text" placeholder="Supplier Name" name="suppliername" value="<%= request.getParameter("supplierName") %>" >
+    <input type="text" placeholder="Description" name="desc" value="<%= request.getParameter("description") %>" >
+    <input type="number" placeholder="Quantity" name="qty" value="<%= request.getParameter("quantity") %>" >
 
 
-<div class="men"><i class="fa fa-shopping-bag" aria-hidden="true" style="background-color:black;color:white"></i> <a href="#">Items</a><p>3</p></div>
+</div>
 
-<div class="men"><a href=""><i class='fa fa-users' style="background-color:green;"></i> Users</a></div>
+<div class="prin">
 
+<div class="edt">
+<button type="submit" style="background-color: blue;cursor:pointer;">Update</button>
 
+</form>
 
-
+</div>
 
 
 
 </div>
 
+
+
+</div>
 <div class="fot">
 
 <div class="lft"><p>Copyright &#169 2023 All right reserved</p>  </div>

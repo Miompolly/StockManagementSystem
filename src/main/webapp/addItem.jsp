@@ -314,8 +314,6 @@ input{
 <div class="down">
 
 
-<h1> Welcome to Stock Management System </h1>
-
 <div class="mid">
 <div class="down">
 <div class="mid">
@@ -325,7 +323,7 @@ input{
 
 <div class="tb">
 
-<form action="StockServlet2" method="POST">
+<form action="StockServlet3" method="POST">
 
     <input type="text" placeholder="Item Name" name="itemname">
     <input type="text" placeholder="Supplier Name" name="suppliername">

@@ -1,24 +1,22 @@
 package com.UserReg;
 
-import java.io.IOException;
-
-import javax.swing.JOptionPane;
-
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
- * Servlet implementation class ServletUser
+ * Servlet implementation class StockServlet3
  */
-public class StockServlet2 extends HttpServlet {
+public class StockServlet3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StockServlet2() {
+    public StockServlet3() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,27 +33,22 @@ public class StockServlet2 extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-String names=request.getParameter("fname");
-String email=request.getParameter("email");
-String password=request.getParameter("password");
-String role="user";
 
-User user1=new User(names,email,password,role);
+String itemname=request.getParameter("itemname");
+String supliername=request.getParameter("suppliername");
+String desk=request.getParameter("desc");
+String qtyParam = request.getParameter("qty");
+int qty = Integer.parseInt(qtyParam);
 
-ConnecDB db=new ConnecDB();
-db.getCon();
-
-String exist=db.addUser(user1);
-if(exist!=null) {
-	JOptionPane.showMessageDialog(null, "Item Added");
-	response.sendRedirect("addItem.jsp");
-	
+Stock stk=new Stock(itemname,supliername,desk,qty);
+ConnecDB db1=new ConnecDB();
+db1.getCon();
+String rs=db1.addStock(stk);
+if(rs!=null) {
+	response.sendRedirect("userDashboard.jsp");
 }else {
 	response.sendRedirect("addItem.jsp");
 }
-
-
-
 
 	}
 

@@ -332,29 +332,39 @@ input{
         <th>Description</th>
         <th>Available stocks</th>
         <th>Edit</th>
-       
+         <th>Delete</th>
        
       </tr>
     </thead>
     <tbody>
-      <%
+       <%
             try {
             	ConnecDB db=new ConnecDB();
             	db.getCon();
             	ResultSet  rs=db.getItem();
             	
             	while(rs.next()){
+            		
+            		 int ItemId = rs.getInt("No");
+            	        String ItemName = rs.getString("ItemName");
+            	        String supplierName = rs.getString("supplierName");
+            	        String description = rs.getString("description");
+            	        String quantity = rs.getString("quantity");
+            		
+            		
+            		
             	 %>
       <tr>
-        <td><%=rs.getInt("No") %></td>
-        <td><%=rs.getString("ItemName")%></td>
-        <td><%=rs.getString("supplierName") %></td>
-        <td><%=rs.getString("description") %></td>
-        <td><%=rs.getString("quantity") %></td>
+        <td><%= ItemId %></td>
+        <td><%= ItemName %></td>
+        <td><%= supplierName %></td>
+        <td><%= description %></td>
+        <td><%= quantity %></td>
       <td> 
-      <a href="update.jsp?id=<%= rs.getInt("No")  %>"><button class="btn btn-primary" style="background-color: green;">Edit</button></a>
-      </td>
       
+      <a href="updateUseD.jsp?ItemId=<%= ItemId %>&ItemName=<%= ItemName %>&supplierName=<%=supplierName%>&description=<%=description %>&quantity=<%=quantity %>"><button class="btn btn-primary" style="background-color: green;">Edit</button></a>
+      </td>
+      <td><a href="deleteItemD.jsp?id=<%= ItemId %>"><button class="btn btn-primary" style="background-color:red;">Delete</button></a></td>
       </tr>
        <% }
           
