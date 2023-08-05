@@ -275,15 +275,15 @@ input{
 
             <div class="important">
             <div class="cont">
-            <i class="fa fa-vimeo-square"></i><a href="dashbord.jsp">dashbord</a>
+          <a href="dashbord.jsp">Dashbord</a>
             </div>
   
             <div class="cont">
-              <i class="fa fa-stack-exchange" aria-hidden="true"></i><a href="stock.jsp"> Stock</a>
+              <a href="stock.jsp"> Stock</a>
             </div>
 
             <div class="cont">
-          <a href="user.jsp"><i class='fa fa-users'></i> User list</a>
+          <a href="user.jsp"> User list</a>
             </div>
          
             <div class="cont">

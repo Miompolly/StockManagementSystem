@@ -1,6 +1,5 @@
-<%@page import="com.UserReg.ConnecDB"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="java.sql.*" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -9,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMS users</title>
+    <title>jsp</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
@@ -131,10 +130,9 @@ a{
   color: white;
   height: 30px;
   width: 130px;
-  
+  margin-left: 35%;
   padding-top: 10px;
   margin-top: 4px;
-  margin-left: 30%;
 }
 .itemm{
   background-color: black;
@@ -143,16 +141,10 @@ a{
   width: 150px;
 }
 .hed{
-  height: 50px;
-  /* border-bottom: 2px solid black; */
+  height: 30px;
+  border-bottom: 2px solid black;
   text-align: left;
-  padding: 15px;
-  width: 50%;
-}
-.rtn{
-  display: flex;
-  /* width: 50%; */
- 
+  padding: 10px;
 }
 .itemss{
   color: rgb(72, 177, 226);
@@ -239,39 +231,31 @@ label{
 }
 .table{
     width: 95%;
-    height: auto;
+    height: 200px;
     border: 300px;
     margin-left: 20px;
     background-color: whitesmoke;
-}
-tr{
-  text-align: center;
 }
 button{
     border: none;
     color: white;
     font-size: 20px;
 }
-.delete{
-  color: white;
-  background-color: red;
-  border: none;
-  height: 30px;
-  width: 100px;
-  border-radius: 5px;
-  font-size: 25px;
+form{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
+    
 }
-.update{
-  color: white;
-  background-color: green;
-  border: none;
-  height: 30px;
-  width: 100px;
-  border-radius: 5px;
-  font-size: 25px;
+input{
+    background-color: rgb(212, 212, 207);
+    margin-top:10px ;
+    height: 30px;
+    width: 80%;
 }
 
 </style>
+
 
   </head>
 <body>
@@ -283,23 +267,23 @@ button{
 
         <div class="nav">
             <div class="log">
-         <img src="" alt="" value="STMS">
-        
+         <img src="p4.PNG" alt="">
+          
       
   
             </div>
 
             <div class="important">
             <div class="cont">
-        <a href="dashboard.jsp">Dashboard</a>
+           <a href="dashbord.jsp">dashbord</a>
             </div>
   
             <div class="cont">
-           <a href="stock.jsp"> Stock</a>
+            <a href="stock.jsp"> Stock</a>
             </div>
 
             <div class="cont">
-          <a href="user.jsp">User list</a>
+          <a href="user.jsp"> User list</a>
             </div>
          
             <div class="cont">
@@ -329,93 +313,44 @@ button{
 
 
         </div>
-
-<div class="down">
-
-
-<h1> Welcome to Stock Management System </h1>
-
-<div class="mid">
-
-
 <div class="down">
 <div class="mid">
 <div class="rtn">
- <div class="hed">List of Users</div>
- <div class="edt"><a href="uform.jsp" > + Add user</a></div>
+ <div class="hed">Update User</div>
 </div>
- <div class="itemss"></div>
+
 <div class="tb">
-<table class="table table-bordered" border="1">
-    <thead>
-      <tr style="background-color: rgb(2, 4, 43);color:white;text-align:center;">
-        <th>No</th>
-        <th>Full Name</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Action</th>
-       
-      </tr>
-    </thead>
-    <tbody>
-     <%
-            try {
-            	ConnecDB db=new ConnecDB();
-            	db.getCon();
-            	ResultSet  rs=db.getUsers();
-            	
-            	while(rs.next()){
-            		
-            		    int userID = rs.getInt("ID");
-            	        String FullName = rs.getString("FullName");
-            	        String Email = rs.getString("Email");
-            	        String role = rs.getString("role");
-            	
-            		
-            		
-            		
-            	 %>
+
+<form action="UserUpdate" method="POST">
+     <input type="number"  name="userID" value="<%= request.getParameter("userID") %>" readonlyy>
+    <input type="text" placeholder="Item Name" name="fullname" value="<%= request.getParameter("FullName") %>" >
+    <input type="email" placeholder="Email" name="email" value="<%= request.getParameter("Email") %>" >
+    <input type="text" placeholder="Role" name="role" value="<%= request.getParameter("role") %>" >
  
- <tr>
-        <td><%= userID %></td>
-        <td><%= FullName %></td>
-        <td><%= Email %></td>
-        <td><%= role %></td> 
-      <td>
-
-
-
-
-   <a href="updateUser.jsp?userID=<%= userID %>&FullName=<%= FullName %>&Email=<%=Email%>&role=<%=role %>"><button class="btn btn-primary" style="background-color: green;">Edit</button></a>
-  
-   <a href="deleteUser.jsp?id=<%= userID %>"><button class="btn btn-primary" style="background-color:red;">Delete</button></a></td>
-      </tr>
-       <% }
-          
-                }catch(Exception e){
-                	e.printStackTrace();
-                }
-            
-            
-               
-            %>
-      
-
-    </tbody>
-
-
-
-  </table>
-
-</div>
 
 
 </div>
 
+<div class="prin">
+
+<div class="edt">
+<button type="submit" style="background-color: blue;cursor:pointer;">Update</button>
+
+</form>
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
 <div class="fot">
 
 <div class="lft"><p>Copyright &#169 2023 All right reserved</p>  </div>
- <div class="rgt"><p>Designed by 	Scot</p></div>
+ <div class="rgt"><p>Designed by Scot</p></div>
  
 </div>
 

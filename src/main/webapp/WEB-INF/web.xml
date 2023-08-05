@@ -39,4 +39,15 @@
     <servlet-name>StockServlet</servlet-name>
     <url-pattern>/StockServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StockServlet2</display-name>
+    <servlet-name>StockServlet2</servlet-name>
+    <servlet-class>com.UserReg.StockServlet2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StockServlet2</servlet-name>
+    <url-pattern>/StockServlet2</url-pattern>
+  </servlet-mapping>
+
 </web-app>

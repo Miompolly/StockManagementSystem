@@ -135,5 +135,177 @@ public class ConnecDB {
 		
 		 return row;  
 	}
+	
+	public boolean deleteItem(int itemID) {
+		loadDriver();
+	    Connection cnx = getCon();
+	    
+	    String sql="DELETE FROM Stock WHERE No=?";
+	    try {
+			PreparedStatement stm=cnx.prepareStatement(sql);
+			stm.setLong(1, itemID);
+			int rowsAffected=stm.executeUpdate();
+			if(rowsAffected>0) {
+				return true;
+			}
+		} catch (SQLException e) {
+		    System.out.println("Failed to delete "+e.getMessage());
+			e.printStackTrace();
+		}
+	    finally {
+	        try {
+	            cnx.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+		return false;
+	  
+	}
+	public String updateItem(String itemName,String supplierName,String description,int quantity,int itemID) {
+		loadDriver();
+	    Connection cnx = getCon();
+	    String mss="updated";
+	    String sql = "UPDATE Stock SET itemName=?, supplierName=?, description=?, quantity=? WHERE NO=?";
+
+	    try {
+			PreparedStatement stm=cnx.prepareStatement(sql);
+			stm.setString(1,itemName);
+			stm.setString(2,supplierName);
+			stm.setString(3,description);
+			stm.setInt(4,quantity);
+			stm.setInt(5,itemID);
+			int rowsAffected=stm.executeUpdate();
+			if(rowsAffected>0) {
+				JOptionPane.showMessageDialog(null, "Item Updated");
+			}
+		} catch (SQLException e) {
+		    System.out.println("Failed to delete "+e.getMessage());
+			e.printStackTrace();
+		}
+	    finally {
+	        try {
+	            cnx.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+		return mss;
+	  
+	}
+	
+	public ResultSet getUsers() {
+		ResultSet row=null;
+		loadDriver();
+		Connection cnx=getCon();
+		String sql="SELECT * FROM users";
+		try {
+			PreparedStatement st=cnx.prepareStatement(sql);
+			row=st.executeQuery();
+		} catch (SQLException e) {
 		
+			e.printStackTrace();
+			System.out.println("No data found !!"+e.getMessage() );
+		}
+		
+		
+		 return row;  
+	}
+	
+	public boolean deleteUser(int userID) {
+		loadDriver();
+	    Connection cnx = getCon();
+	    
+	    String sql="DELETE FROM users WHERE ID=?";
+	    try {
+			PreparedStatement stm=cnx.prepareStatement(sql);
+			stm.setLong(1, userID);
+			int rowsAffected=stm.executeUpdate();
+			if(rowsAffected>0) {
+				return true;
+			}
+		} catch (SQLException e) {
+		    System.out.println("Failed to delete "+e.getMessage());
+			e.printStackTrace();
+		}
+	    finally {
+	        try {
+	            cnx.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+		return false;
+	  
+	}
+	
+	
+	public String addUserAd(User user1) {
+		String messag="Created Successfully";
+		
+		loadDriver();
+		Connection cnx=getCon();
+	
+			
+			String sql="INSERT INTO users (FullName,email,password,role)VALUES(?,?,?,?)";
+			try {
+				PreparedStatement stm=cnx.prepareStatement(sql);
+				stm.setString(1,user1.getNames());
+				stm.setString(2,user1.getEmail());
+				stm.setString(3,user1.getPassword());
+				stm.setString(4,user1.getRole());
+				int rs=stm.executeUpdate();
+				
+				if(rs>0) {
+					JOptionPane.showMessageDialog(null, "User Created Successfully");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "User not Created !!! Try again");
+				}
+			} catch (SQLException e) {
+			
+				e.printStackTrace();
+				System.out.println("User not created ,"+e.getMessage());
+			}
+			return messag;
+		}
+	
+	public String updateUser(String fullname,String email,String role,int userID) {
+		loadDriver();
+	    Connection cnx = getCon();
+	    String mss="updated";
+	    String sql = "UPDATE users SET FullName=?, email=?, role=? WHERE ID=?";
+
+	    try {
+			PreparedStatement stm=cnx.prepareStatement(sql);
+			stm.setString(1,fullname);
+			stm.setString(2,email);
+			stm.setString(3,role);
+			stm.setInt(4,userID);
+		
+			int rowsAffected=stm.executeUpdate();
+			if(rowsAffected>0) {
+				JOptionPane.showMessageDialog(null, "User Updated");
+			}
+		} catch (SQLException e) {
+		    System.out.println("Failed to delete "+e.getMessage());
+			e.printStackTrace();
+		}
+	    finally {
+	        try {
+	            cnx.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+		return mss;
+	  
+	}
+	
+	
+	
 }

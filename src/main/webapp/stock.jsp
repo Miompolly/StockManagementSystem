@@ -274,15 +274,15 @@ input{
 
             <div class="important">
             <div class="cont">
-            <i class="fa fa-vimeo-square"></i><a href="dashboard.jsp">Dashboard</a>
+           <a href="dashboard.jsp">Dashboard</a>
             </div>
   
             <div class="cont">
-              <i class="fa fa-stack-exchange" aria-hidden="true"></i><a href="stock.jsp"> Stock</a>
+             <a href="stock.jsp"> Stock</a>
             </div>
 
             <div class="cont">
-          <a href="user.jsp"><i class='fa fa-users'></i> User list</a>
+          <a href="user.jsp"> User list</a>
             </div>
          
             <div class="cont">
@@ -349,17 +349,27 @@ input{
             	ResultSet  rs=db.getItem();
             	
             	while(rs.next()){
+            		
+            		 int ItemId = rs.getInt("No");
+            	        String ItemName = rs.getString("ItemName");
+            	        String supplierName = rs.getString("supplierName");
+            	        String description = rs.getString("description");
+            	        String quantity = rs.getString("quantity");
+            		
+            		
+            		
             	 %>
       <tr>
-        <td><%=rs.getInt("No") %></td>
-        <td><%=rs.getString("ItemName")%></td>
-        <td><%=rs.getString("supplierName") %></td>
-        <td><%=rs.getString("description") %></td>
-        <td><%=rs.getString("quantity") %></td>
+        <td><%= ItemId %></td>
+        <td><%= ItemName %></td>
+        <td><%= supplierName %></td>
+        <td><%= description %></td>
+        <td><%= quantity %></td>
       <td> 
-      <a href="update.jsp?id=<%= rs.getInt("No")  %>"><button class="btn btn-primary" style="background-color: green;">Edit</button></a>
+      
+      <a href="update.jsp?ItemId=<%= ItemId %>&ItemName=<%= ItemName %>&supplierName=<%=supplierName%>&description=<%=description %>&quantity=<%=quantity %>"><button class="btn btn-primary" style="background-color: green;">Edit</button></a>
       </td>
-      <td><a href="deleteFood.jsp?id=<%= rs.getInt("NO") %>"><button class="btn btn-primary" style="background-color:red;">Delete</button></a></td>
+      <td><a href="deleteItem.jsp?id=<%= ItemId %>"><button class="btn btn-primary" style="background-color:red;">Delete</button></a></td>
       </tr>
        <% }
           
