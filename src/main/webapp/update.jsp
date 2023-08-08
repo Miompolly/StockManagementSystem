@@ -322,7 +322,7 @@ input{
 <div class="tb">
 
 <form action="updateServlet" method="POST">
-     <input type="number"  name="itemID" value="<%= request.getParameter("ItemId") %>" readonlyy>
+     <input type="number"  name="itemID" value="<%= request.getParameter("ItemId") %>" readonly>
     <input type="text" placeholder="Item Name" name="itemname" value="<%= request.getParameter("ItemName") %>" >
     <input type="text" placeholder="Supplier Name" name="suppliername" value="<%= request.getParameter("supplierName") %>" >
     <input type="text" placeholder="Description" name="desc" value="<%= request.getParameter("description") %>" >
